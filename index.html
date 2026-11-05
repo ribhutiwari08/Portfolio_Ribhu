@@ -439,6 +439,122 @@ h1{font-family:var(--font-display);font-size:clamp(4rem,12.2vw,11.2rem);line-hei
 .arch img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:grayscale(1) contrast(1.08) drop-shadow(0 0 24px rgba(255,106,26,.16));mix-blend-mode:lighten;transform:none;background:transparent}
 .portrait{isolation:isolate}
 
+
+/* ===== Final hero match: complete name + floating portrait ===== */
+.hero{
+  min-height:min(900px,calc(100svh - 56px));
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 70% 52%,rgba(255,106,26,.16),transparent 42%),
+    radial-gradient(ellipse at 76% 90%,rgba(190,190,190,.09),transparent 35%),
+    #080909;
+}
+.hero-in{
+  display:block;
+  width:100%;
+  max-width:1600px;
+  min-height:780px;
+  margin-inline:auto;
+  padding-inline:clamp(28px,7vw,112px);
+}
+.hero-copy{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:none;
+  padding-top:clamp(1.2rem,3vw,3rem);
+}
+.hero-copy h1{
+  width:100%;
+  max-width:none;
+  font-size:clamp(4rem,9.8vw,9.5rem);
+  line-height:.82;
+  letter-spacing:-.065em;
+  position:relative;
+  z-index:1;
+}
+.hero-copy .ln{overflow:visible;white-space:nowrap;margin:0;padding:0}
+.hero-copy .ln:nth-child(2){padding-left:6vw}
+.hero-copy .ln:nth-child(3){padding-left:14vw}
+.hero-copy .role{
+  position:relative;
+  z-index:3;
+  margin-top:clamp(2rem,4.2vw,4rem);
+  font-size:clamp(1rem,1.65vw,1.35rem);
+}
+.hero-copy .lede{
+  position:relative;
+  z-index:3;
+  max-width:410px;
+  font-size:clamp(1.05rem,1.65vw,1.45rem);
+  line-height:1.2;
+}
+.hero-copy .cta{position:relative;z-index:3}
+.portrait{
+  position:absolute;
+  z-index:2;
+  top:16%;
+  right:clamp(12px,3.5vw,58px);
+  bottom:0;
+  width:clamp(420px,42vw,680px);
+  height:84%;
+  max-width:49%;
+  aspect-ratio:auto;
+  animation:pop 1s cubic-bezier(.2,.8,.2,1) .15s both;
+}
+.arch{
+  inset:0;
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  clip-path:none!important;
+}
+.arch img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  background:transparent!important;
+  filter:grayscale(1) contrast(1.12) brightness(1.22) drop-shadow(0 0 26px rgba(255,106,26,.22));
+  mix-blend-mode:screen;
+  transform:none!important;
+}
+.frame{display:none!important}
+.seal,.chip{display:none!important}
+.hero::before{
+  width:min(48vw,680px);
+  height:min(48vw,680px);
+  right:21%;
+  top:2%;
+}
+.hero::after{
+  width:min(38vw,540px);
+  height:min(52vw,720px);
+  right:33%;
+  top:12%;
+}
+@media(max-width:900px){
+  .hero{min-height:900px}
+  .hero-in{min-height:840px;padding-inline:28px}
+  .hero-copy h1{font-size:clamp(3.8rem,10.5vw,7rem)}
+  .portrait{right:0;top:25%;width:54vw;height:75%;max-width:55%}
+}
+@media(max-width:640px){
+  .hero{min-height:880px}
+  .hero-in{min-height:820px;padding-inline:20px}
+  .hero-copy{padding-top:1.8rem}
+  .hero-copy h1{font-size:clamp(3.1rem,13.2vw,5.6rem);line-height:.86}
+  .hero-copy .ln:nth-child(2){padding-left:3vw}
+  .hero-copy .ln:nth-child(3){padding-left:8vw}
+  .hero-copy .role{margin-top:2rem}
+  .hero-copy .lede{max-width:290px;font-size:1.02rem}
+  .portrait{top:auto;bottom:0;right:-3%;width:min(76vw,390px);height:55%;max-width:78%}
+  .hero::before{width:75vw;height:75vw;right:5%;top:32%}
+  .hero::after{width:60vw;height:78vw;right:18%;top:39%}
+}
+
 </style>
 </head>
 <body>
@@ -497,7 +613,7 @@ h1{font-family:var(--font-display);font-size:clamp(4rem,12.2vw,11.2rem);line-hei
           <span class="ln"><span style="--d:1">Bhushan</span></span>
           <span class="ln"><span style="--d:2">Tiwari</span></span>
         </h1>
-        <p class="role">I'm a <span class="swap" id="swap">Python backend developer</span>.</p>
+        <p class="role">I'm a <span class="swap" id="swap">Machine Learning R&amp;D Analyst</span>.</p>
         <p class="lede">MCA graduate in Artificial Intelligence and Machine Learning. I build REST APIs, connect LLM APIs to real product flows, and test what I ship. Right now I work in Machine Learning R&amp;D at GlobalLogic.</p>
         <div class="cta">
           <a class="btn primary" href="#projects">View projects</a>
@@ -860,7 +976,7 @@ h1{font-family:var(--font-display);font-size:clamp(4rem,12.2vw,11.2rem);line-hei
 
   /* Rotating role */
   var swap = document.getElementById('swap');
-  var words = ['Python backend developer', 'Generative AI builder', 'Full-stack developer', 'Machine learning R&D analyst'];
+  var words = ['Machine Learning R&D Analyst', 'Python backend developer', 'Generative AI builder', 'Full-stack developer'];
   var wi = 0;
   setInterval(function () {
     if (!fxOn() || document.hidden) return;
