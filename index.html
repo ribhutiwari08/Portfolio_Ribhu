@@ -24,6 +24,7 @@
   --ridge-far: color-mix(in oklab, var(--accent) 17%, var(--bg));
   --ridge-mid: color-mix(in oklab, var(--accent) 9%, var(--bg));
   --shadow: color-mix(in oklab, black 65%, transparent);
+  --blue: oklch(0.74 0.15 245);
   --font-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: dark;
@@ -40,6 +41,7 @@
     --ridge-far: color-mix(in oklab, var(--accent) 24%, var(--bg));
     --ridge-mid: color-mix(in oklab, var(--accent) 12%, var(--bg));
     --shadow: color-mix(in oklab, oklch(0.3 0.05 var(--hue)) 35%, transparent);
+    --blue: oklch(0.5 0.18 255);
     color-scheme: light;
   }
 }
@@ -54,6 +56,7 @@
   --ridge-far: color-mix(in oklab, var(--accent) 24%, var(--bg));
   --ridge-mid: color-mix(in oklab, var(--accent) 12%, var(--bg));
   --shadow: color-mix(in oklab, oklch(0.3 0.05 var(--hue)) 35%, transparent);
+    --blue: oklch(0.5 0.18 255);
   color-scheme: light;
 }
 
@@ -144,14 +147,14 @@ h1 {
   filter: drop-shadow(0 0 12px color-mix(in oklab, var(--accent) 70%, transparent)); }
 
 .portrait {
-  position: absolute; z-index: 0; left: 50%; bottom: 0; height: 94%; margin: 0; opacity: .2;
+  position: absolute; z-index: 0; left: 50%; bottom: 0; height: 94%; margin: 0; opacity: .34;
   translate: calc(-50% + var(--px, 0) * -9px) calc(var(--py, 0) * -6px); transition: translate .35s ease-out;
   animation: wmIn 1.4s ease .2s both;
   -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 14%, #000 70%, transparent);
 }
 .portrait img { display: block; height: 100%; width: auto; max-width: none; }
 
-.hero-copy { position: relative; z-index: 3; grid-row: 3; align-self: end; max-width: 31rem; }
+.hero-copy { position: relative; z-index: 3; grid-row: 3; align-self: end; max-width: 36rem; }
 .role {
   font-family: var(--font-display); font-weight: 700; font-stretch: 100%; text-transform: uppercase;
   font-size: clamp(1rem, 1.7vw, 1.4rem); line-height: 1.25; letter-spacing: .01em;
@@ -180,12 +183,13 @@ h1 {
 }
 @keyframes jit { 0%,100% { translate: 0 0; } 25% { translate: -2px 1px; } 50% { translate: 2px -1px; } 75% { translate: -1px -1px; } }
 .swap.glitch { animation: jit .12s steps(1, end) 5; }
-.lede { margin-top: 1.1rem; color: color-mix(in oklab, var(--ink) 90%, transparent); font-size: clamp(1.05rem, 1.55vw, 1.4rem); line-height: 1.32; }
+.lede { max-width: 31rem; margin-top: 1.1rem; color: color-mix(in oklab, var(--ink) 90%, transparent); font-size: clamp(1.05rem, 1.55vw, 1.4rem); line-height: 1.32; }
 .hero-copy .role, .hero-copy .lede, .hero-copy .cta { animation: fade .8s ease .55s both; }
 .cta { margin-top: 1.7rem; display: flex; flex-wrap: wrap; gap: .75rem; }
 .btn {
   display: inline-flex; align-items: center; padding: .72rem 1.25rem; border: 1px solid var(--line); border-radius: 6px;
   font-weight: 600; font-size: .96rem; transition: transform .2s, border-color .2s, background .2s;
+  background: transparent; font-family: inherit; cursor: pointer;
 }
 .btn:hover { border-color: var(--accent); transform: translateY(-2px); }
 .hero .btn { border-color: rgba(255, 255, 255, .32); color: var(--ink); }
@@ -287,7 +291,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
   background: color-mix(in oklab, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
 }
 .lb img { max-width: min(100%, 1100px); max-height: 80dvh; border-radius: 8px; box-shadow: 0 30px 80px -20px var(--shadow); }
-.lb button { position: absolute; top: max(14px, calc(env(safe-area-inset-top, 0px) + 8px)); right: max(14px, calc(env(safe-area-inset-right, 0px) + 8px)); }
+.lb > button { position: absolute; top: max(14px, calc(env(safe-area-inset-top, 0px) + 8px)); right: max(14px, calc(env(safe-area-inset-right, 0px) + 8px)); }
 
 /* Contact */
 .rows { border-top: 1px solid var(--line); max-width: 640px; }
@@ -301,6 +305,29 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
 .foot { border-top: 1px solid var(--line); padding-block: 1.6rem 2.2rem; color: var(--muted); font-size: .92rem; }
 .foot .wrap { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; justify-content: space-between; }
 .foot a:hover { color: var(--accent); }
+
+/* Blue section titles */
+h2 { width: fit-content; max-width: 100%; background: linear-gradient(100deg, var(--fg) 12%, var(--blue) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; padding-bottom: .08em; }
+h2::before { content: ""; display: block; width: 52px; height: 4px; border-radius: 4px; margin-bottom: 1.1rem; background: var(--blue); box-shadow: 0 0 18px color-mix(in oklab, var(--blue) 70%, transparent); -webkit-text-fill-color: initial; }
+
+/* Resume dialog */
+.rm-card { position: relative; width: min(100%, 440px); max-height: 100%; overflow-y: auto; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 1.6rem 1.4rem 1.4rem; box-shadow: 0 30px 80px -20px var(--shadow); }
+.rm-card .mini { position: absolute; top: .8rem; right: .8rem; }
+.rm-card h3 { font-size: 1.5rem; padding-right: 4.5rem; }
+.rm-card .note { margin-top: .5rem; color: var(--muted); font-size: .98rem; }
+.rm-form { margin-top: 1.2rem; display: grid; gap: 1rem; }
+.fld { display: grid; gap: .35rem; }
+.fld label { font-weight: 600; font-size: .95rem; }
+.fld input { width: 100%; font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: .7rem .8rem; transition: border-color .2s, box-shadow .2s; }
+.fld input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in oklab, var(--blue) 30%, transparent); }
+.fld input[aria-invalid="true"] { border-color: #ff5d6c; }
+.err { min-height: 1.1em; color: #ff7a86; font-size: .9rem; }
+:root[data-theme="light"] .err { color: #c0243a; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .err { color: #c0243a; } }
+.rm-form .btn { justify-content: center; width: 100%; cursor: pointer; border: 0; }
+.rm-done { margin-top: 1.1rem; display: grid; gap: 1rem; }
+.rm-done .btn { justify-content: center; }
+.hint { color: var(--muted); font-size: .88rem; }
 
 /* Customize panel */
 .panel {
@@ -333,7 +360,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
 @keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes pop { from { opacity: 0; scale: .94; } to { opacity: 1; scale: 1; } }
-@keyframes wmIn { from { opacity: 0; } to { opacity: .2; } }
+@keyframes wmIn { from { opacity: 0; } to { opacity: .34; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 @keyframes slide { to { transform: translateX(-50%); } }
@@ -343,7 +370,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
 :root[data-fx="off"] { scroll-behavior: auto; }
 :root[data-fx="off"] .rv { opacity: 1; translate: none; }
 :root[data-fx="off"] .rings { transform: none; }
-:root[data-fx="off"] .portrait { translate: -50% 0; opacity: .2; }
+:root[data-fx="off"] .portrait { translate: -50% 0; opacity: .34; }
 :root[data-fx="off"] .track { width: auto; flex-wrap: wrap; justify-content: center; }
 :root[data-fx="off"] .track ul[aria-hidden="true"] { display: none; }
 :root[data-fx="off"] .track ul { flex-wrap: wrap; justify-content: center; }
@@ -360,7 +387,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
 @media (max-width: 860px) {
   .hero-in { display: block; min-height: 0; }
   h1 { font-size: clamp(3rem, 14.2vw, 7rem); }
-  .portrait { height: 72%; opacity: .22; }
+  .portrait { height: 72%; opacity: .36; }
   .hero-copy { max-width: none; margin-top: 1.2rem; }
   .rings { inset: 0 0 auto 0; height: 62%; opacity: .5; }
   .rg1 { left: 18%; top: 14%; width: 80%; }
@@ -446,6 +473,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
           <a class="btn primary" href="#projects">View projects</a>
           <a class="btn" href="https://github.com/ribhutiwari08" target="_blank" rel="noopener">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/ribhu-bhushan-tiwari-832432262/" target="_blank" rel="noopener">LinkedIn</a>
+          <button class="btn" type="button" data-resume id="resume-hero">Get resume</button>
         </div>
       </div>
     </div>
@@ -639,6 +667,7 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
       </div>
       <div class="rows rv" style="--i:1">
         <div class="row"><span class="k">Email</span><a class="v" id="email" href="mailto:ribhubhushan08@gmail.com">ribhubhushan08@gmail.com</a><button class="mini" id="copy" type="button">Copy</button></div>
+        <div class="row"><span class="k">Resume</span><span class="v">PDF, one page</span><button class="mini" type="button" data-resume id="resume-contact">Get resume</button></div>
         <div class="row"><span class="k">GitHub</span><a class="v" href="https://github.com/ribhutiwari08" target="_blank" rel="noopener">github.com/ribhutiwari08</a><span></span></div>
         <div class="row"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/ribhu-bhushan-tiwari-832432262/" target="_blank" rel="noopener">Ribhu Bhushan Tiwari</a><span></span></div>
       </div>
@@ -656,6 +685,39 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Certificate" hidden>
   <button class="mini" id="lb-close" type="button">Close</button>
   <img id="lb-img" alt="">
+</div>
+
+<div class="lb" id="rm" role="dialog" aria-modal="true" aria-labelledby="rm-title" hidden>
+  <div class="rm-card">
+    <button class="mini" id="rm-close" type="button">Close</button>
+    <div id="rm-ask">
+      <h3 id="rm-title">Download resume</h3>
+      <p class="note">Share your details to download the PDF. Use a working email address and a mobile number.</p>
+      <form class="rm-form" id="rm-form" novalidate>
+        <div class="fld">
+          <label for="rm-name">Full name</label>
+          <input id="rm-name" name="name" type="text" autocomplete="name" aria-describedby="rm-name-e" required>
+          <span class="err" id="rm-name-e" aria-live="polite"></span>
+        </div>
+        <div class="fld">
+          <label for="rm-email">Email</label>
+          <input id="rm-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" aria-describedby="rm-email-e" required>
+          <span class="err" id="rm-email-e" aria-live="polite"></span>
+        </div>
+        <div class="fld">
+          <label for="rm-phone">Mobile number</label>
+          <input id="rm-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" aria-describedby="rm-phone-e" required>
+          <span class="err" id="rm-phone-e" aria-live="polite"></span>
+        </div>
+        <button class="btn primary" id="rm-submit" type="submit">Download resume</button>
+      </form>
+    </div>
+    <div id="rm-ok" class="rm-done" hidden>
+      <h3>Thank you</h3>
+      <p class="note" id="rm-ok-msg">Your download is starting.</p>
+      <a class="btn primary" id="rm-link" href="Ribhu_Bhushan_Tiwari_Resume.pdf" download="Ribhu_Bhushan_Tiwari_Resume.pdf" target="_blank" rel="noopener">Download again</a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -723,9 +785,98 @@ h3 { font-size: 1.28rem; font-weight: 700; font-stretch: 100%; line-height: 1.25
   lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      if (!lb.hidden) closeLb();
+      if (!rm.hidden) closeRm();
+      else if (!lb.hidden) closeLb();
       else if (!panel.hidden) { openPanel(false); custBtn.focus(); }
     }
+  });
+
+  /* Resume gate: validate name, email and phone, then start the download */
+  var RESUME_ENDPOINT = ''; /* optional: paste a form-backend URL (Formspree, Google Apps Script) to receive the details */
+  var rm = document.getElementById('rm');
+  var rmForm = document.getElementById('rm-form');
+  var rmAsk = document.getElementById('rm-ask');
+  var rmOk = document.getElementById('rm-ok');
+  var rmFields = { name: document.getElementById('rm-name'), email: document.getElementById('rm-email'), phone: document.getElementById('rm-phone') };
+  var rmErr = { name: document.getElementById('rm-name-e'), email: document.getElementById('rm-email-e'), phone: document.getElementById('rm-phone-e') };
+  var rmOpener = null;
+  var DISPOSABLE = ['mailinator.com','tempmail.com','temp-mail.org','10minutemail.com','guerrillamail.com','yopmail.com','trashmail.com','throwawaymail.com','sharklasers.com','getnada.com','maildrop.cc','dispostable.com','fakeinbox.com','mohmal.com','emailondeck.com','tempmailo.com','mailnesia.com','mintemail.com','spamgourmet.com','moakt.com','burnermail.io','tempail.com','fakemail.net','mytemp.email'];
+  var FAKE_DOMAINS = ['example.com','example.org','test.com','domain.com','email.com','mail.com','abc.com','xyz.com','sample.com','fake.com','asdf.com'];
+  var FAKE_LOCALS = ['test','testing','abc','abcd','xyz','demo','fake','none','na','sample','asdf','qwerty','user','email','admin','noreply','example'];
+  var TYPOS = { 'gmial.com':'gmail.com','gmai.com':'gmail.com','gamil.com':'gmail.com','gmail.con':'gmail.com','gmail.co':'gmail.com','gmil.com':'gmail.com','gmaill.com':'gmail.com','gnail.com':'gmail.com','yahho.com':'yahoo.com','yaho.com':'yahoo.com','yahoo.con':'yahoo.com','hotmial.com':'hotmail.com','hotmail.con':'hotmail.com','outlok.com':'outlook.com','outlook.con':'outlook.com' };
+
+  function checkName(v) {
+    v = v.trim().replace(/\s+/g, ' ');
+    if (v.length < 2) return 'Enter your full name.';
+    if (/[0-9_@#$%^&*()+=<>\/\\|{}\[\]~`]/.test(v)) return 'Use letters only in your name.';
+    if ((v.match(/\p{L}/gu) || []).length < 2) return 'Enter your full name.';
+    if (/^(.)\1+$/i.test(v.replace(/\s/g, ''))) return 'Enter your real name.';
+    return '';
+  }
+  function checkEmail(v) {
+    v = v.trim().toLowerCase();
+    if (!v) return 'Enter your email address.';
+    if (!/^[a-z0-9._%+-]+@[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(v) || /\.\./.test(v) || /^[.-]|[.-]@|@[.-]|[.-]$/.test(v)) return 'Enter a valid email address, like name@company.com.';
+    var parts = v.split('@'), local = parts[0], domain = parts[1];
+    var tld = domain.split('.').pop();
+    if (tld.length < 2 || /[0-9]/.test(tld)) return 'Enter a valid email address, like name@company.com.';
+    if (TYPOS[domain]) return 'Did you mean ' + local + '@' + TYPOS[domain] + '?';
+    if (DISPOSABLE.indexOf(domain) > -1) return 'Temporary email addresses are not accepted. Use your real email.';
+    if (FAKE_DOMAINS.indexOf(domain) > -1 || FAKE_LOCALS.indexOf(local) > -1 || local.length < 2 || /^(.)\1+$/.test(local) || /^(?:abc|123|qwe|asd|xyz)/.test(local) && local.length < 6) return 'That looks like a placeholder email. Use your real email address.';
+    if (domain === 'gmail.com' && local.replace(/\./g, '').length < 6) return 'Gmail addresses have at least 6 characters. Check the spelling.';
+    return '';
+  }
+  function normPhone(v) {
+    var d = v.replace(/[\s\-().]/g, '');
+    if (/^(\+91|0091)/.test(d)) d = d.replace(/^(\+91|0091)/, '');
+    else if (d.length === 12 && d.indexOf('91') === 0) d = d.slice(2);
+    else if (d.length === 11 && d.charAt(0) === '0') d = d.slice(1);
+    return d;
+  }
+  function checkPhone(v) {
+    var d = normPhone(v);
+    if (!d) return 'Enter your mobile number.';
+    if (!/^[6-9][0-9]{9}$/.test(d)) return 'Enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.';
+    var distinct = {}; d.split('').forEach(function (c) { distinct[c] = 1; });
+    if (Object.keys(distinct).length <= 2 || '01234567890123456789'.indexOf(d) > -1 || '98765432109876543210'.indexOf(d) > -1) return 'That looks like a placeholder number. Use your real mobile number.';
+    return '';
+  }
+  var CHECKS = { name: checkName, email: checkEmail, phone: checkPhone };
+  function validate(key) {
+    var msg = CHECKS[key](rmFields[key].value);
+    rmErr[key].textContent = msg;
+    rmFields[key].setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+  Object.keys(rmFields).forEach(function (k) {
+    rmFields[k].addEventListener('blur', function () { if (rmFields[k].value) validate(k); });
+    rmFields[k].addEventListener('input', function () { if (rmFields[k].getAttribute('aria-invalid') === 'true') validate(k); });
+  });
+  function openRm(opener) {
+    rmOpener = opener || null;
+    rmAsk.hidden = false; rmOk.hidden = true;
+    rm.hidden = false;
+    rmFields.name.focus();
+  }
+  function closeRm() { rm.hidden = true; if (rmOpener) rmOpener.focus(); }
+  document.querySelectorAll('[data-resume]').forEach(function (b) { b.addEventListener('click', function () { openRm(b); }); });
+  document.getElementById('rm-close').addEventListener('click', closeRm);
+  rm.addEventListener('click', function (e) { if (e.target === rm) closeRm(); });
+  rmForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    ['name', 'email', 'phone'].forEach(function (k) { if (!validate(k) && !bad) bad = k; });
+    if (bad) { rmFields[bad].focus(); return; }
+    var data = { name: rmFields.name.value.trim().replace(/\s+/g, ' '), email: rmFields.email.value.trim().toLowerCase(), phone: '+91 ' + normPhone(rmFields.phone.value), at: new Date().toISOString() };
+    if (RESUME_ENDPOINT) {
+      try { fetch(RESUME_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function () {}); } catch (err) {}
+    }
+    document.getElementById('rm-ok-msg').textContent = 'Thanks, ' + data.name.split(' ')[0] + '. Your download is starting. If it does not, use the button below.';
+    rmAsk.hidden = true; rmOk.hidden = false;
+    var link = document.getElementById('rm-link');
+    link.textContent = 'Download resume';
+    try { link.click(); } catch (err) {}
+    link.focus();
   });
 
   /* Copy email */
